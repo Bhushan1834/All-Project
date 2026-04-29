@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAgri - ML Irrigation System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-seedling"></i>
+                <h2>SmartAgri</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active"><a href="#"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="#" onclick="retrainModel()"><i class="fa-solid fa-brain"></i> Retrain ML</a></li>
+                <li><a href="#" onclick="fetchHistory()"><i class="fa-solid fa-history"></i> History</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Real-Time Monitoring</h1>
+                <div class="status-badge" id="pump-status">
+                    <div class="indicator"></div>
+                    <span id="pump-text">Pump: OFF</span>
+                </div>
+            </header>
+
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card moisture">
+                    <div class="kpi-icon"><i class="fa-solid fa-droplet"></i></div>
+                    <div class="kpi-data">
+                        <h3>Soil Moisture</h3>
+                        <p id="moisture-val">-- %</p>
+                    </div>
+                </div>
+                <div class="kpi-card temperature">
+                    <div class="kpi-icon"><i class="fa-solid fa-temperature-half"></i></div>
+                    <div class="kpi-data">
+                        <h3>Temperature</h3>
+                        <p id="temp-val">-- °C</p>
+                    </div>
+                </div>
+                <div class="kpi-card rain">
+                    <div class="kpi-icon"><i class="fa-solid fa-cloud-rain"></i></div>
+                    <div class="kpi-data">
+                        <h3>Rain Probability</h3>
+                        <p id="rain-val">-- %</p>
+                    </div>
+                </div>
+                <div class="kpi-card prediction">
+                    <div class="kpi-icon ai-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <div class="kpi-data">
+                        <h3>ML Prediction (Water)</h3>
+                        <p id="water-val">-- L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert-box" id="alert-box" style="display: none;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span id="alert-text">Critical Alert!</span>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="chart-container">
+                    <h3>Moisture Trend</h3>
+                    <canvas id="moistureChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Water Usage (Liters)</h3>
+                    <canvas id="waterChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- History Table -->
+            <div class="history-section">
+                <h3>Recent Activity Logs</h3>
+                <div class="table-responsive">
+                    <table id="history-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Moisture</th>
+                                <th>Rain Prob</th>
+                                <th>ML Status</th>
+                                <th>Action</th>
+                                <th>Water Vol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
